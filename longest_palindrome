@@ -1,0 +1,27 @@
+
+def longest_palindrome(s)
+    # expand around centre technique
+    len = s.size
+    return s if len <= 1
+    max = 1
+    start = 0
+    (0...len).each do |i|
+        len1 = palindrome(i, i, s, len) # odd palindrome from the given index
+        len2 = palindrome(i, i+1, s, len) # even palinrome from given index giving the adjent value
+        le = [len1, len2].max
+
+        if le > max
+            start = i - (le - 1)/2
+            max = le
+        end
+    end
+    s[start, max]
+end
+
+def palindrome(l, r, s, len)
+    while l >= 0 && r < len && s[l] == s[r]
+        l -= 1
+        r += 1
+    end
+    r - l - 1
+end
