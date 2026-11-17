@@ -1,0 +1,13 @@
+def sum_of_left_leaves(root)
+    traverse(root)
+end
+
+def traverse(node, pos = '')
+    return 0 unless node
+
+    if pos == 'l' && node.left.nil? && node.right.nil?
+        return node.val
+    end
+
+    traverse(node.left, 'l') + traverse(node.right, 'r')
+end
